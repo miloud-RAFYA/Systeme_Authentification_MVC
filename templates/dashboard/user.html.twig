@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-blue-600">Espace Candidat</h1>
+
+    <div class="bg-white p-6 rounded shadow">
+        <p>Bienvenue {{user.name}}</p>
+        <ul class="list-disc ml-5 mt-3">
+            <li>Modifier votre profil</li>
+            <li>Voir vos candidatures</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

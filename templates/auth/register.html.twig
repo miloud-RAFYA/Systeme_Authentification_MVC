@@ -1,0 +1,28 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Mon site{% endblock %}</title>
+</head>
+<body>
+    <header> <h1>Bienvenue sur mon site</h1> </header>
+    <main>
+        {% block content %}
+        <p>Contenu par défaut</p>
+        {% endblock %}
+    </main>
+    <footer>
+        &copy; 2026 Mon site</footer>
+</body>
+</html>
+{% extends "base.twig" %}
+{% block title %}Page d'accueil{% endblock %}
+
+{% block content %}
+    <p>Bienvenue sur la page d'accueil !</p>
+{% endblock %}
+
+

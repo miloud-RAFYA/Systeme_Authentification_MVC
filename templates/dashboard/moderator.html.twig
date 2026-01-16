@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6 text-purple-600">Dashboard Entreprise</h1>
+
+    <div class="bg-white p-6 rounded shadow">
+        <p>Bienvenue dans votre espace entreprise.</p>
+        <ul class="list-disc ml-5 mt-3">
+            <li>Gérer vos offres</li>
+            {# {%for } #}
+            <li>Consulter les candidats</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
