@@ -4,36 +4,50 @@ namespace App\Service;
 
 use App\Repository\UserRepository;
 use App\Core\Session;
+use App\Entity\User;
 
 class AuthService
 {
-    public function login(string $email , string $password)
+    public function login(string $email, string $password)
     {
         $repo = new UserRepository();
-        $user = $repo->findByUsername ($email );
+        $user = $repo->findByUsername($email);
 
-        if (!$user || !($password==$user['password'])) {
-            die('Identifiants incorrects');
+        if (!$user || !($password == $user['password'])) {
+            return false;
         }
         Session::set('user', $user);
-        header('Location: index.php?controller=dashboard&action=dashboard');
+        switch ($$user['role']) {
+            case 'admin':
+                header('Location: dashboardAdmin');
+                break;
+            case 'company':
+                header('Location: dashboardComp');
+                break;
+            case 'condidat':
+                header('Location: dashboarCond');
+                break;
+            
+            default:
+                echo "role indivand";
+                break;
+        }
+        
         exit;
     }
-    public function register(string $username , string $password)
+    public function register($name, $email, $password, $passwordConfig, $role)
     {
         $repo = new UserRepository();
-        $user = $repo->findByUsername ($username );
-
-        if (!$user || !password_verify($password, $user['password'])) {
-            die('Identifiants incorrects');
+        $check = $repo->findByUsername($email);
+        if ($check && $password != $passwordConfig) {
+            return false;
         }
-
-        if ($user['status'] !== 'active') {
-            die('Compte non activé');
+        $user = new User($name, $email, $password);
+        $user->getRole()->setName($role);
+        $insert = $repo->insert($user);
+        if(!$insert){
+            return false;
         }
-
-        Session::set('user', $user);
-        header('Location: index.php?controller=dashboard&action=index');
-        exit;
+        return true;
     }
 }

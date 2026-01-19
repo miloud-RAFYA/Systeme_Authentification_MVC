@@ -23,7 +23,7 @@ class AuthController extends Controller
             $auth->login($_POST['email'], $_POST['password']);
         }
 
-        $this->render('auth/login.html.twig');
+        $this->render('auth/register.html.twig');
     }
 
     public function logout()
